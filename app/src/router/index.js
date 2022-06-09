@@ -7,6 +7,28 @@ import Login from '@/pages/Login'
 import Search from '@/pages/Search'
 import Register from '@/pages/Register'
 
+//先把VueRouter原型对象的push保存一份
+let originPush =  VueRouter.prototype.push;
+let originReplace = VueRouter.prototype.replace;
+//重写push|replace
+//第一个参数：告诉原来的push方法，往哪里跳转
+//
+VueRouter.prototype.push = function(location,resolve,reject){
+    if(resolve&&reject){
+        //console.log(111)
+        originPush.call(this,location,resolve,reject)
+    }else{
+        originPush.call(this,location,()=>{},()=>{})
+    }
+}
+
+VueRouter.prototype.replace =  function(location,resolve,reject){
+    if(resolve&&reject){
+        originReplace.call(this,location,resolve,reject)
+    }else{
+        originReplace.call(this,location,()=>{},()=>{})
+    }
+}
 export default new VueRouter({
     mode: 'history',
     routes: [
@@ -33,7 +55,7 @@ export default new VueRouter({
         },
         {
             path: '*',
-            redirect: '/Home',
+            redirect: '/home',
             meta: { show: true },
         }
     ]

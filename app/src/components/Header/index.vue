@@ -11,7 +11,7 @@
                         <!-- 声明式导航：务必要有to属性 -->
                         <router-link to="/login">登录</router-link>
                         <router-link to="/register" class="register">注册</router-link>
-            
+
                     </p>
                 </div>
                 <div class="typeList">
@@ -54,7 +54,7 @@ export default {
     data() {
         //这里存放数据
         return {
-            keyword:'',
+            keyword: '',
         };
     },
     //监听属性 类似于data概念
@@ -63,8 +63,11 @@ export default {
     watch: {},
     //方法集合
     methods: {
-        goSearch(){
-            this.$router.push({name:'search',params:{keyword:this.keyword},query:{k:this.keyword}})
+        goSearch() {
+            this.$router.push({
+                name: 'search',
+                params: { keyword: this.keyword || undefined }
+            })
             //搜索按钮的回调函数，需要向search路由进行跳转
             //this.$router.push('/search');
         },
