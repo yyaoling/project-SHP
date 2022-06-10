@@ -5,19 +5,7 @@
         <div class="sortList clearfix">
             <div class="center">
                 <!--banner轮播-->
-                <div class="swiper-container" ref="cur">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide" v-for="(carousel, index) in bannerList" :key="carousel.id">
-                            <img :src="carousel.imgUrl" />
-                        </div>
-                    </div>
-                    <!-- 如果需要分页器 -->
-                    <div class="swiper-pagination"></div>
-
-                    <!-- 如果需要导航按钮 -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
-                </div>
+                <Carousel :list="bannerList"></Carousel>
             </div>
             <div class="right">
                 <div class="news">
@@ -106,11 +94,12 @@
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
 import { mapState } from 'vuex';
-import Swiper from 'swiper'
+import Carousel from '@/components/Carousel/index.vue';
+
 export default {
     //import引入的组件需要注入到对象中才能使用
     name: 'ListContainer',
-    components: {},
+    components: { Carousel },
     data() {
         //这里存放数据
         return {
@@ -124,30 +113,7 @@ export default {
         })
     },
     //监控data中的数据变化
-    watch: {
-        //监听bannerList数据的变化因为数据发生过变化----由空数组变为有值
-        bannerList: {
-            handler(newValue, oldValue) {
 
-                this.$nextTick(() => {
-                    var mySwiper = new Swiper(this.$refs.cur, {
-                        loop: true,
-                        // 如果需要分页器
-                        pagination: {
-                            el: ".swiper-pagination",
-                            //点击小球的时候也切换图片
-                            clickable: true,
-                        },
-                        // 如果需要前进后退按钮
-                        navigation: {
-                            nextEl: ".swiper-button-next",
-                            prevEl: ".swiper-button-prev",
-                        },
-                    });
-                });
-            }
-        }
-    },
     //方法集合
     methods: {
 

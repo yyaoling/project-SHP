@@ -7,10 +7,10 @@
                 <h3 class="fl">{{ list.name }}</h3>
                 <div class="fr">
                     <ul class="nav-tabs clearfix">
-                        <li :class="{active:index==0}" v-for="(nav,index) in list.navList" :key="index">
-                            <a href="#tab1" data-toggle="tab">{{nav.text}}</a>
+                        <li :class="{ active: index == 0 }" v-for="(nav, index) in list.navList" :key="index">
+                            <a href="#tab1" data-toggle="tab">{{ nav.text }}</a>
                         </li>
-                       
+
                     </ul>
                 </div>
             </div>
@@ -27,20 +27,7 @@
                             <img :src="list.imgUrl" />
                         </div>
                         <div class="floorBanner">
-                            <div class="swiper-container" ref="floor1Swiper">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide" v-for="(carousel, index) in list.carouselList"
-                                        :key="carousel.id">
-                                        <img :src="carousel.imgUrl">
-                                    </div>
-                                </div>
-                                <!-- 如果需要分页器 -->
-                                <div class="swiper-pagination"></div>
-
-                                <!-- 如果需要导航按钮 -->
-                                <div class="swiper-button-prev"></div>
-                                <div class="swiper-button-next"></div>
-                            </div>
+                            <Carousel :list="list.carouselList"></Carousel>
                         </div>
                         <div class="split">
                             <span class="floor-x-line"></span>
@@ -74,7 +61,7 @@
 <script>
 //这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 //例如：import 《组件名称》 from '《组件路径》';
-import Swiper from 'swiper';
+
 export default {
     //import引入的组件需要注入到对象中才能使用
     name: 'Floor',
@@ -89,7 +76,7 @@ export default {
     //监听属性 类似于data概念
     computed: {},
     //监控data中的数据变化
-    watch: {},
+
     //方法集合
     methods: {
 
@@ -100,20 +87,7 @@ export default {
     },
     //生命周期 - 挂载完成（可以访问DOM元素）
     mounted() {
-        var mySwiper = new Swiper(this.$refs.floor1Swiper, {
-            loop: true,
-            // 如果需要分页器
-            pagination: {
-                el: ".swiper-pagination",
-                //点击小球的时候也切换图片
-                clickable: true,
-            },
-            // 如果需要前进后退按钮
-            navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-            },
-        });
+
     },
     beforeCreate() { }, //生命周期 - 创建之前
     beforeMount() { }, //生命周期 - 挂载之前
