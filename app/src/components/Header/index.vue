@@ -64,12 +64,15 @@ export default {
     //方法集合
     methods: {
         goSearch() {
-            this.$router.push({
-                name: 'search',
-                params: { keyword: this.keyword || undefined }
-            })
-            //搜索按钮的回调函数，需要向search路由进行跳转
-            //this.$router.push('/search');
+            //代表的是如果有query参数也带过去
+            if (this.$route.query) {
+                let loction = {
+                    name: "search",
+                    params: { keyword: this.keyword || undefined },
+                };
+                loction.query = this.$route.query;
+                this.$router.push(loction);
+            }
         },
     },
     //生命周期 - 创建完成（可以访问当前this实例）
